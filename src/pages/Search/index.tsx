@@ -1,9 +1,9 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { getAllCountries, getByCountry } from "../../actions";
-import LineChart from "../../components/LineChart";
 import Header from "../../components/Header";
 import InfoStatus from "../../components/InfoStatus";
 import InputSearch from "../../components/InputSearch";
+import LineChart from "../../components/LineChart";
 
 export type CountryInterface = {
   Country: string;

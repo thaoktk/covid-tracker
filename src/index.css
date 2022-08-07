@@ -16,7 +16,7 @@ code {
 }
 
 .search-content {
-  max-height: 150px;
+  max-height: 200px;
   overflow-y: auto;
   top: calc(100% + 10px);
 }
