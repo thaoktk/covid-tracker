@@ -42,7 +42,7 @@ function InputSearch({ onSubmitValue, listCountries }: InputSearchInterface) {
 
   return (
     <div className=" w-full px-8 py-5">
-      <div className="relative">
+      <div className="relative flex justify-center">
         <div className="px-5 py-2 md:w-[500px] w-full flex items-center justify-between bg-white rounded-main drop-shadow-sec">
           <div className="flex items-center w-full">
             <BiSearch className="text-xl text-[#A3A3A3]" />
@@ -61,7 +61,7 @@ function InputSearch({ onSubmitValue, listCountries }: InputSearchInterface) {
           />
         </div>
         {isSearching && (
-          <div className="absolute left-0 z-10 md:w-[500px] w-full bg-white rounded-main drop-shadow-sec search-content">
+          <div className="absolute z-10 md:w-[500px] w-full bg-white rounded-main drop-shadow-sec search-content">
             {arraySearchValue?.map((item, idx) => {
               return (
                 <div
