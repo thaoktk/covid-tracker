@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { BiChevronDown, BiSearch } from "react-icons/bi";
 import { CountryInterface } from "../../pages/Search";
 
-interface InputSearchInterface {
+type InputSearchInterface = {
   onSubmitValue: (value: string) => void;
   listCountries?: CountryInterface[];
-}
+};
 
 function InputSearch({ onSubmitValue, listCountries }: InputSearchInterface) {
   const [isSearching, setIsSearching] = useState(false);
@@ -23,12 +23,16 @@ function InputSearch({ onSubmitValue, listCountries }: InputSearchInterface) {
     setSearchValue(e.target.value);
   };
 
-  const arraySearchValue = listCountries?.filter((value) => {
-    if (searchValue.length <= 0) return value;
-    else if (value.Country.toLowerCase().includes(searchValue.toLowerCase())) {
-      return value;
-    }
-  });
+  const arraySearchValue = listCountries
+    ?.sort((valueA, valueB) => valueA.Country.localeCompare(valueB.Country))
+    .filter((value) => {
+      if (searchValue.length <= 0) return value;
+      else if (
+        value.Country.toLowerCase().includes(searchValue.toLowerCase())
+      ) {
+        return value;
+      }
+    });
 
   const handleClickCountry = (e: React.MouseEvent, slug: string) => {
     onSubmitValue(slug);

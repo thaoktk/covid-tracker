@@ -5,7 +5,7 @@ import Header from "../../components/Header";
 import InfoStatus from "../../components/InfoStatus";
 import SeeMore from "../../components/SeeMore";
 
-interface WorldInterface {
+type WorldInterface = {
   Global: {
     TotalConfirmed: number;
     TotalDeaths: number;
@@ -15,7 +15,7 @@ interface WorldInterface {
     Country: string;
     TotalConfirmed: number;
   }[];
-}
+};
 
 function World() {
   const [statusWorld, setStatusWorld] = useState<WorldInterface | undefined>();

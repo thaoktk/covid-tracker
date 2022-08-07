@@ -1,22 +1,27 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { getAllCountries, getByCountry } from "../../actions";
 import LineChart from "../../components/LineChart";
 import Header from "../../components/Header";
 import InfoStatus from "../../components/InfoStatus";
 import InputSearch from "../../components/InputSearch";
 
-export interface CountryInterface {
+export type CountryInterface = {
   Country: string;
   Slug: string;
-}
+};
 
-interface CountrySelected {
+type CountrySelected = {
   Confirmed: number;
   Deaths: number;
   Recovered: number;
   Active: number;
   Date: string;
-}
+};
+
+type ChartType = {
+  Date: string;
+  Confirmed: number;
+};
 
 function Search() {
   const [countries, setCountries] = useState<CountryInterface[] | undefined>();
@@ -25,6 +30,7 @@ function Search() {
     CountrySelected[] | undefined
   >();
   const [statusChart, setStatusChart] = useState("All");
+  const [dataChart, setDataChart] = useState<ChartType[] | undefined>();
 
   const getSearchValue = (value: string) => {
     setCountrySelected(value);
@@ -41,32 +47,38 @@ function Search() {
     );
   }, [countrySelected]);
 
-  const lastValue = dataOfCountrySelected?.slice(-1)[0];
-
-  const dataInfoStatus = {
-    TotalConfirmed: lastValue?.Confirmed,
-    TotalDeaths: lastValue?.Deaths,
-    TotalRecovered: lastValue?.Recovered,
-    Active: lastValue?.Active,
-  };
-
-  let dataChart = dataOfCountrySelected?.map((value) => {
+  const dataInfoStatus = useMemo(() => {
+    const lastValue = dataOfCountrySelected?.slice(-1)[0];
     return {
-      Date: value.Date,
-      Confirmed: value.Confirmed,
+      TotalConfirmed: lastValue?.Confirmed,
+      TotalDeaths: lastValue?.Deaths,
+      TotalRecovered: lastValue?.Recovered,
+      Active: lastValue?.Active,
     };
-  });
+  }, [dataOfCountrySelected]);
 
-  if (statusChart === "Weekly") {
-    dataChart = dataChart?.slice(-7);
-  } else if (statusChart === "Monthly") {
-    dataChart = dataChart?.slice(-30);
-  }
+  const titleOfChartSearch = useMemo(() => {
+    return {
+      country: countrySelected,
+      status: statusChart,
+    };
+  }, [countrySelected, statusChart]);
 
-  const titleOfChartSearch = {
-    country: countrySelected,
-    status: statusChart,
-  };
+  useEffect(() => {
+    let customData = dataOfCountrySelected?.map((value) => {
+      return {
+        Date: value.Date,
+        Confirmed: value.Confirmed,
+      };
+    });
+    if (statusChart === "Weekly") {
+      customData = customData?.slice(-7);
+    } else if (statusChart === "Monthly") {
+      customData = customData?.slice(-30);
+    }
+
+    setDataChart(customData);
+  }, [statusChart, dataOfCountrySelected]);
 
   return (
     <div className="flex justify-center items-center">

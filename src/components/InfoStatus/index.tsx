@@ -1,13 +1,13 @@
 import { FaCheckCircle, FaHeart, FaSkull, FaStethoscope } from "react-icons/fa";
 
-interface InfoStatusInterface {
+type InfoStatusInterface = {
   data?: {
     TotalConfirmed?: number;
     TotalDeaths?: number;
     TotalRecovered?: number;
     Active?: number;
   };
-}
+};
 
 function InfoStatus({ data }: InfoStatusInterface) {
   const activeCases = data?.Active
