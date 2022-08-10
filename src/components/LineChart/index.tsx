@@ -22,7 +22,7 @@ ChartJS.register(
   Legend
 );
 
-type LineChartInterface = {
+interface LineChartInterface {
   dataWorld?: {
     Country: string;
     TotalConfirmed: number;
@@ -35,7 +35,7 @@ type LineChartInterface = {
     country: string;
     status: string;
   };
-};
+}
 
 export default function LineChart({
   dataWorld,
