@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { BiChevronDown, BiSearch } from "react-icons/bi";
-import { CountryInterface } from "../../pages/Search";
+import { CountryType } from "../../pages/Search";
 
 interface InputSearchInterface {
   onSubmitValue: (value: string) => void;
-  listCountries?: CountryInterface[];
+  listCountries?: CountryType[];
 }
 
 function InputSearch({ onSubmitValue, listCountries }: InputSearchInterface) {

@@ -19,10 +19,12 @@ function Header() {
   const location = useLocation();
 
   return (
-    <div className="md:px-8 px-5 py-4 flex items-center justify-between">
+    <header className="md:px-8 px-5 py-4 flex items-center justify-between">
       <div className="flex items-center">
         <FaVirus className="md:text-6xl text-5xl text-main-blue mr-4" />
-        <span className="md:text-3xl text-2xl text-main-blue font-bold">Covid Tracker</span>
+        <span className="md:text-3xl text-2xl text-main-blue font-bold">
+          Covid Tracker
+        </span>
       </div>
       <div className="hidden lg:flex items-center justify-between gap-6">
         {navPath.map((item, index) => {
@@ -42,7 +44,7 @@ function Header() {
       </div>
       <div className="lg:hidden relative">
         <div className="p-3" onClick={() => setShowNavMobile(!showNavMobile)}>
-          <BiMenu className="text-2xl font-medium"/>
+          <BiMenu className="text-2xl font-medium" />
         </div>
         {showNavMobile && (
           <div className="absolute top-full right-0 z-20 px-11 py-3 bg-white rounded-main drop-shadow-main">
@@ -63,7 +65,7 @@ function Header() {
           </div>
         )}
       </div>
-    </div>
+    </header>
   );
 }
 

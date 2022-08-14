@@ -1,16 +1,17 @@
 import { useEffect, useMemo, useState } from "react";
 import { getAllCountries, getByCountry } from "../../actions";
+import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import InfoStatus from "../../components/InfoStatus";
 import InputSearch from "../../components/InputSearch";
 import LineChart from "../../components/LineChart";
 
-export type CountryInterface = {
+export type CountryType = {
   Country: string;
   Slug: string;
 };
 
-type CountrySelected = {
+type CountrySelectedType = {
   Confirmed: number;
   Deaths: number;
   Recovered: number;
@@ -24,13 +25,17 @@ type ChartType = {
 };
 
 function Search() {
-  const [countries, setCountries] = useState<CountryInterface[] | undefined>();
+  const [countries, setCountries] = useState<CountryType[] | undefined>(
+    undefined
+  );
   const [countrySelected, setCountrySelected] = useState("vietnam");
   const [dataOfCountrySelected, setDataOfCountrySelected] = useState<
-    CountrySelected[] | undefined
-  >();
+    CountrySelectedType[] | undefined
+  >(undefined);
   const [statusChart, setStatusChart] = useState("All");
-  const [dataChart, setDataChart] = useState<ChartType[] | undefined>();
+  const [dataChart, setDataChart] = useState<ChartType[] | undefined>(
+    undefined
+  );
 
   const getSearchValue = (value: string) => {
     setCountrySelected(value);
@@ -86,9 +91,9 @@ function Search() {
         <Header />
         <InputSearch onSubmitValue={getSearchValue} listCountries={countries} />
         <div className="my-3 flex items-center justify-center">
-          <p className="text-3xl text-fourth-red font-bold">
+          <h1 className="text-3xl text-fourth-red font-bold">
             {countrySelected.toUpperCase()}
-          </p>
+          </h1>
         </div>
         <div className="px-8 py-5 grid grid-cols-6">
           <div className="lg:col-span-4 col-span-6">
@@ -118,6 +123,7 @@ function Search() {
             <InfoStatus data={dataInfoStatus} />
           </div>
         </div>
+        <Footer />
       </div>
     </div>
   );

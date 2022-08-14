@@ -4,6 +4,7 @@ import LineChart from "../../components/LineChart";
 import Header from "../../components/Header";
 import InfoStatus from "../../components/InfoStatus";
 import SeeMore from "../../components/SeeMore";
+import Footer from "../../components/Footer";
 
 type WorldInterface = {
   Global: {
@@ -18,7 +19,9 @@ type WorldInterface = {
 };
 
 function World() {
-  const [statusWorld, setStatusWorld] = useState<WorldInterface | undefined>();
+  const [statusWorld, setStatusWorld] = useState<WorldInterface | undefined>(
+    undefined
+  );
 
   useEffect(() => {
     getSummary()
@@ -39,6 +42,7 @@ function World() {
             <SeeMore />
           </div>
         </div>
+        <Footer />
       </div>
     </div>
   );
